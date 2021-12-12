@@ -19,7 +19,7 @@ export class ScannerComponent implements OnInit, AfterViewInit {
   errorMessage: string;
 
   shoppingCart: ShoppingCart;
-
+  bodyText : string;
   //modalService: ModalService;
 
   private catalogue: Article[] = [
@@ -38,7 +38,7 @@ export class ScannerComponent implements OnInit, AfterViewInit {
               private updateService: UpdateService,
               private stockService: StockService,
               private modalService: ModalService) {
-    this.shoppingCart = new ShoppingCart();
+    this.shoppingCart = new ShoppingCart(modalService);
     //this.modalService = new ModalService();
   }
 
@@ -195,11 +195,11 @@ export class ScannerComponent implements OnInit, AfterViewInit {
           }
 
           if(this.productInStock) {
-            console.log("Produto: " + this.productInStock.productName)
+            console.log("Produto: " + this.productInStock.productName) 
             //this.shoppingCart.addStockProduct(this.productInStock);
 
-            //this.modalService.add('custom-modal-1');
-            this.modalService.open('custom-modal-1');
+            this.shoppingCart.openModal();
+            //this.modalService.open('custom-modal-1');
 
             //this.lastScannedCode = barCodeNumber;
             //this.lastScannedCodeDate = now;
@@ -217,13 +217,14 @@ export class ScannerComponent implements OnInit, AfterViewInit {
 
   save() {
     const now = new Date().getTime();
+    this.modalService.close('custom-modal-1');
 
     this.shoppingCart.addStockProduct(this.productInStock);
-            this.lastScannedCodeDate = now;
-            this.beepService.beep();
-            this.changeDetectorRef.detectChanges();
-            this.modalService.close('custom-modal-1');
-            //this.modalService.add('custom-modal-1');
+    this.lastScannedCodeDate = now;
+    this.beepService.beep();
+    this.changeDetectorRef.detectChanges();
+    //this.modalService.remove('custom-modal-1');
+    //this.modalService.add('custom-modal-1');
   }
 
 }

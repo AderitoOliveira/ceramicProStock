@@ -6,12 +6,10 @@ export class ShoppingCart {
 
   //items: Map<Article, number>;
   items: Map<StockProductForScanner, number>;
-  modalService: ModalService;
 
-  constructor() {
+  constructor(private modalService: ModalService) {
     //this.items = new Map<Article, number>();
     this.items = new Map<StockProductForScanner, number>();
-    this.modalService = new ModalService();
   }
 
   ngOnInit(): void {
@@ -35,6 +33,10 @@ export class ShoppingCart {
       //this.modalService.open('custom-modal-1');
     }
 
+  }
+
+  openModal () {
+    this.modalService.open('custom-modal-1');
   }
 
   get shoppingCartItems() {
