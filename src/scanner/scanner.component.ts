@@ -196,15 +196,15 @@ export class ScannerComponent implements OnInit, AfterViewInit {
 
           if(this.productInStock) {
             console.log("Produto: " + this.productInStock.productName) 
-            //this.shoppingCart.addStockProduct(this.productInStock);
+            
+            let x = this.shoppingCart.checkIfProductAlreadyScanned(this.productInStock);
+            if(x) {
+              this.shoppingCart.openModal('custom-modal-2');
+            } else {
+              this.shoppingCart.openModal('custom-modal-1');
+            }
 
-            this.shoppingCart.openModal();
-            //this.modalService.open('custom-modal-1');
-
-            //this.lastScannedCode = barCodeNumber;
-            //this.lastScannedCodeDate = now;
-            //this.beepService.beep();
-            //this.changeDetectorRef.detectChanges();
+            //this.shoppingCart.openModal('custom-modal-1');
           }
 
         }

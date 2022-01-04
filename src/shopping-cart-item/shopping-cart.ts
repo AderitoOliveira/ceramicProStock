@@ -5,11 +5,11 @@ import { ModalService } from '../_modal/modal.service';
 export class ShoppingCart {
 
   //items: Map<Article, number>;
-  items: Map<StockProductForScanner, number>;
+  items: Map<String, StockProductForScanner>;
 
   constructor(private modalService: ModalService) {
     //this.items = new Map<Article, number>();
-    this.items = new Map<StockProductForScanner, number>();
+    this.items = new Map<String, StockProductForScanner>();
   }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class ShoppingCart {
   }
   */
 
+  /*
   addStockProduct(stockProductForScanner: StockProductForScanner) {
     if (this.items.has(stockProductForScanner)) {
       this.items.set(stockProductForScanner, this.items.get(stockProductForScanner) + 1);
@@ -33,10 +34,19 @@ export class ShoppingCart {
       //this.modalService.open('custom-modal-1');
     }
 
+  }*/
+
+  addStockProduct(stockProductForScanner: StockProductForScanner) {
+      this.items.set(stockProductForScanner.bar_code_number, stockProductForScanner);
   }
 
-  openModal () {
-    this.modalService.open('custom-modal-1');
+  checkIfProductAlreadyScanned (stockProductForScanner: StockProductForScanner) {
+    let k = this.items.has(stockProductForScanner.bar_code_number);
+    return k;
+  }
+
+  openModal (modalId) {
+    this.modalService.open(modalId);
   }
 
   get shoppingCartItems() {
@@ -50,7 +60,7 @@ export class ShoppingCart {
   get totalPrice(): number {
     let total = 0;
     for (const entry of this.items.entries()) {
-      total += entry[0].quantityInStock * entry[1];
+     // total += entry[0].quantityInStock * entry[1];
     }
     return total;
   }

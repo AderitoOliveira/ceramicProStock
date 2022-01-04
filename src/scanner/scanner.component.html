@@ -18,8 +18,8 @@
   
       <app-shopping-cart-item
         *ngFor="let articleAndCount of shoppingCart.shoppingCartItems"
-        [article]="articleAndCount[0]"
-        [count]="articleAndCount[1]">
+        [article]="articleAndCount[1]"
+        [count]="articleAndCount[0]">
       </app-shopping-cart-item>
   
       <div class="shopping-cart-total">
@@ -32,4 +32,7 @@
     <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
     <button (click)="closeModal('custom-modal-1');">Close</button>
     <button (click)="save();">Guardar</button>
+  </jw-modal>
+  <jw-modal id="custom-modal-2">
+    <h1>O produto já existe na lista para adicionar ao stock!</h1>
   </jw-modal>
